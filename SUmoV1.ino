@@ -2,9 +2,10 @@
 #include <Ultrasonic.h>
 
 // Definição de pinos para sensores e motores
-#define SENSOR_LINHA_ESQUERDA 11
-#define SENSOR_LINHA_CENTRO 12
-#define SENSOR_LINHA_DIREITA 13
+// O sensor de linha emite um sinal LOW (false) em superfície escura e emite um sinal HIGH (true) em superfície clara.
+#define SENSOR_LINHA_ESQUERDA 11 // Traseiro
+#define SENSOR_LINHA_CENTRO 12 //Frontal esquerdo
+#define SENSOR_LINHA_DIREITA 13 // Frontal direito
 #define BOTAO_LIGAR 2
 
 #define MOTOR_ESQUERDO_FRENTE 5
@@ -50,8 +51,8 @@ void setup() {
 }
 
 void loop() {
-  // Verifica se detectou a linha preta (borda do ringue)
-  if (!digitalRead(SENSOR_LINHA_CENTRO) || !digitalRead(SENSOR_LINHA_DIREITA)) {
+  // Verifica se detectou a linha branca (borda do ringue)
+  if (digitalRead(SENSOR_LINHA_CENTRO) || digitalRead(SENSOR_LINHA_DIREITA)) { //TODO verificar o uso dos sensores frontais e trazeiros
     Serial.println("Linha detectada! Recuando...");
     stop();
     delay(100);
